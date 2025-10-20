@@ -1,0 +1,25 @@
+/* Minimal portfolio styles */
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+}
+
+header .lead {
+  color: rgba(255,255,255,0.9);
+}
+
+.card img {
+  height: 180px;
+  object-fit: cover;
+}
+
+footer a {
+  color: #333;
+}
+
+@media (max-width: 767px) {
+  header .display-4 { font-size: 2rem; }
+}
