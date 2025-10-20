@@ -1,0 +1,17 @@
+{% extends 'admin_auth/base.html' %}
+{% block title %} Home | Test-Blog{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <h2 class="text-center text-primary">Welcome </h2>
+        <h3 class="text-center text-primary">Your Order-requests</h3>
+        
+        {% for post in object_list %}
+            <h2><a href="{% url 'details' post.pk %}">{{ post.firstname }}</a></h2>
+            <h4>{{post.title}} <small> by | {{ post.firstname }}</small></h4>
+            <hr><hr>
+        {% endfor %}
+    </div>
+
+{% endblock %}

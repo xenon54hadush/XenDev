@@ -1,0 +1,18 @@
+{% extends 'admin_auth/base.html' %}
+
+{% block title %} Permission denied {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 text-center">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="text-danger">Permission denied</h2>
+        <p class="lead">You do not have the necessary permissions to view this page.</p>
+        <p>If you believe this is an error, contact an administrator.</p>
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Return home</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

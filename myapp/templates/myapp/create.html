@@ -1,0 +1,47 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %} Book Order | Test-Blog {% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="mb-4 text-primary">Book Now</h3>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if name_exists %}<p class="text-danger">{{name_exists}}</p>{% endif %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Title</label>
+                            {{ form.title }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">First Name</label>
+                            {{ form.firstname }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Last Name</label>
+                            {{ form.lastname }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Phone Number</label>
+                            {{ form.phone_number }}
+                        </div>
+                        {% if error_message %}<p class="text-danger">{{error_message}}</p>{% endif %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            {{ form.contents }}
+                        </div>
+                        <div class="d-grid gap-2 pt-3">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

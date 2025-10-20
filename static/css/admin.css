@@ -1,0 +1,28 @@
+/* Admin area styles */
+body.bg-light {
+  background: #f6f7fb;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: .6px;
+}
+
+.card {
+  border: none;
+  border-radius: .6rem;
+}
+
+.card-footer .btn {
+  min-width: 72px;
+}
+
+.form-control, textarea {
+  box-shadow: none !important;
+}
+
+.text-muted.small { font-size: 0.9rem; }
+
+@media (max-width: 576px) {
+  .card-img-top { height: 160px !important; }
+}

@@ -1,0 +1,78 @@
+{% extends 'admin_auth/base.html' %}
+{% load static %}
+
+{% block title %} Admin Dashboard {% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 mb-0">Posts</h1>
+    <p class="text-muted small">Manage blog posts and media</p>
+  </div>
+  <div>
+    <a href="{% url 'create-post' %}" class="btn btn-primary me-2">Create post</a>
+    <a href="{% url 'create-project' %}" class="btn btn-outline-success">Create project</a>
+  </div>
+</div>
+
+<div class="row g-4">
+  {% for post in object_list %}
+  <div class="col-md-6">
+    <div class="card h-100 shadow-sm">
+      {% if post.image %}
+      <img src="{{ post.image.url }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="{{ post.title }}">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text text-muted small">{{ post.body|truncatechars:160 }}</p>
+      </div>
+      <div class="card-footer bg-white border-top-0 d-flex justify-content-between">
+        <div>
+          <a href="{% url 'details' post.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+        </div>
+        <div class="btn-group">
+          <a href="{% url 'update-post' post_id=post.pk %}" class="btn btn-sm btn-outline-warning">Edit</a>
+          <a href="{% url 'delete-post' post_id=post.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <div class="col-12"><p class="text-muted">No posts yet.</p></div>
+  {% endfor %}
+</div>
+
+<hr class="my-4">
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="h5 mb-0">Work samples</h2>
+    <p class="text-muted small">Latest projects</p>
+  </div>
+  <div>
+    <a href="{% url 'create-project' %}" class="btn btn-sm btn-success">Add project</a>
+  </div>
+</div>
+<div class="row g-3 mb-4">
+  {% for project in projects %}
+  <div class="col-md-4">
+    <div class="card h-100">
+      {% if project.image %}
+      <img src="{{ project.image.url }}" class="card-img-top" style="height:140px; object-fit:cover;" alt="{{ project.title }}">
+      {% else %}
+      <img src="{% static 'images/default.jpg' %}" class="card-img-top" style="height:140px; object-fit:cover;" alt="{{ project.title }}">
+      {% endif %}
+      <div class="card-body">
+        <h6 class="card-title mb-1">{{ project.title }}</h6>
+        <p class="card-text small text-muted">{{ project.description|truncatechars:80 }}</p>
+      </div>
+      <div class="card-footer bg-white border-top-0 d-flex justify-content-end">
+        <a href="{% url 'project-detail' project.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12"><p class="text-muted">No projects yet.</p></div>
+  {% endfor %}
+</div>
+
+{% endblock %}

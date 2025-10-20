@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block title %} {{ object.title }} | Project {% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="card mx-auto" style="max-width:900px;">
+        {% if object.image %}
+        <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }}" style="object-fit:cover; max-height:360px;">
+        {% else %}
+        <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="{{ object.title }}" style="object-fit:cover; max-height:360px;">
+        {% endif %}
+        <div class="card-body">
+            <h3 class="card-title">{{ object.title }}</h3>
+            <p class="text-muted small mb-3">{{ object.date|date:"M d, Y" }}</p>
+            <div class="card-text" style="white-space: pre-line;">{{ object.description }}</div>
+            <div class="mt-4 d-flex justify-content-end gap-2">
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'project-update' object.pk %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'project-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

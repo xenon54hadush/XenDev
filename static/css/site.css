@@ -1,0 +1,9 @@
+/* Site-wide styles */
+body { background: #f8f9fb; }
+.site-header { background: linear-gradient(90deg,#0d6efd,#6610f2); }
+.navbar .nav-link { color: rgba(255,255,255,0.95) !important; }
+.hero { padding: 4rem 0; }
+.card { border-radius: .6rem; }
+.footer { background: #ffffff; border-top: 1px solid #e9ecef; padding: 2rem 0; }
+
+@media (max-width: 576px) { .hero { padding: 2rem 0 } }

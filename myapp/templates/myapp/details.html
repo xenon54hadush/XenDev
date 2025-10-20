@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">{{ object.firstname }} {{ object.lastname }}</h3>
+        <p class="text-muted small">{{ object.date|date:"M d, Y" }}</p>
+        <hr>
+        <p><strong>Title:</strong> {{ object.title }}</p>
+        <p><strong>Phone:</strong> {{ object.phone_number }}</p>
+        <p><strong>Email:</strong> {{ object.email }}</p>
+        <div class="mt-4">
+          <a href="{% url 'orders' %}" class="btn btn-outline-secondary">&larr; Back to orders</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

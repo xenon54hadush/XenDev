@@ -1,0 +1,111 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %} Home | Portfolio{% endblock %}
+
+{% block extra_head %}
+        <!--  -->
+{% endblock %}
+
+{% block content %}
+<header class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4">Your Name</h1>
+                <p class="lead">Frontend developer • Designer • Problem solver</p>
+                <p>
+                    <a class="btn btn-primary btn-lg me-2" href="#work-samples" data-bs-toggle="tab">View Projects</a>
+                    <a class="btn btn-outline-light btn-lg" href="#work-samples" data-bs-toggle="tab">Work samples</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-center d-none d-md-block">
+                <img src="https://via.placeholder.com/300" alt="profile" class="rounded-circle img-fluid shadow">
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container py-5">
+    <section id="about" class="mb-5">
+        <h2>About me</h2>
+        <p>Short paragraph about you — your specialties, background, and what problems you like to solve. Keep it concise and client-focused.</p>
+    </section>
+
+    <section class="mb-5">
+        <ul class="nav nav-tabs" id="homeTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts-tab-pane" type="button" role="tab" aria-controls="posts-tab-pane" aria-selected="true">Posts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="samples-tab" data-bs-toggle="tab" data-bs-target="#samples-tab-pane" type="button" role="tab" aria-controls="samples-tab-pane" aria-selected="false">Work samples</button>
+            </li>
+        </ul>
+        <div class="tab-content pt-4">
+            <div class="tab-pane fade show active" id="posts-tab-pane" role="tabpanel" aria-labelledby="posts-tab">
+                <div class="row g-4">
+                    {% for post in object_list %}
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="{{ post.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title|default:"Untitled" }}</h5>
+                                <p class="card-text">{{ post.body|truncatechars:120 }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <a href="{% url 'details' post.pk %}" class="btn btn-sm btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12"><p class="text-muted">No posts yet.</p></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="samples-tab-pane" role="tabpanel" aria-labelledby="samples-tab">
+                <div class="row g-4" id="projects">
+                    {% for project in projects %}
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            {% if project.image %}
+                            <img src="{{ project.image.url }}" class="card-img-top" style="height:180px; object-fit:cover;" alt="{{ project.title }}">
+                            {% else %}
+                            <img src="{% static 'images/default.jpg' %}" class="card-img-top" style="height:180px; object-fit:cover;" alt="{{ project.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.title }}</h5>
+                                <p class="card-text text-muted small">{{ project.description|truncatechars:120 }}</p>
+                            </div>
+                            <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
+                                <a href="{% url 'project-detail' project.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+                                <small class="text-muted">{{ project.date|date:"Y" }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12"><p class="text-muted">No projects yet.</p></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-light py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>© {{ now|date:"Y" }} Your Name</div>
+        <div>
+            <a href="#" class="text-decoration-none me-2">GitHub</a>
+            <a href="#" class="text-decoration-none me-2">LinkedIn</a>
+            <a href="#" class="text-decoration-none">Twitter</a>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}
+
+{% block extra_js %}
+    
+{% endblock %}
