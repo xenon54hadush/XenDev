@@ -1,1 +1,1 @@
-web: gunicorn XenDev.wsgi
+web: gunicorn XenDev.wsgi:application
